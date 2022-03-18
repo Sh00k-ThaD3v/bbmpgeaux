@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "d2/*": ["d2/*"]
+    },
+    // strict and moduleResolution is for volar
+    // https://github.com/johnsoncodehk/volar#note
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "dist"],
+  "includes": [
+    "components.d.ts"
+  ]
+}

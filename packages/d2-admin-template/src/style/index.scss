@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// --------------------------------------------------------------------------------
+
+// The minimal amount of CSS to replicate the GitHub Markdown style
+@import 'github-markdown-css';
+
+// Ignore the base style of ant design
+// Solve the display problem in dark mode
+.markdown-body {
+  h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+  }
+}
+
+// --------------------------------------------------------------------------------
+
+// Code highlight theme
+// Only some themes are built in by default
+// If you need other theme but we don't provide them by default
+// Please download and import them yourself
+// Needs to be imported after markdown styles
+// [preview] https://highlightjs.org/static/demo/
+// [download] https://github.com/highlightjs/highlight.js/tree/main/src/styles
+@import '@/style/library/highlight/atom-one-light.css';
+
+// Resolve conflicts between GitHub markdown CSS and highlightjs
+// The .p-0 class is set at markdownItOptions in the vite.config.js file
+// Although .p-0 class is already included in tailwindcss
+// The settings in tailwindcss are not used here to separate them from each other
+.markdown-body {
+  pre.p-0 {
+    padding: 0px;
+  }
+}
+
+// --------------------------------------------------------------------------------
+
+// Highlightjs base style
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+// Make the display consistent in the following two cases:
+// <code class="hljs">Hello World</code>
+// `Hello World`
+code.hljs {
+  padding: 0.2em 0.4em;
+}

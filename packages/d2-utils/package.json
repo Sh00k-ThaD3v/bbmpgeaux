@@ -1,0 +1,33 @@
+{
+  "name": "@d2-framework/d2-utils",
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "scripts": {
+    "prebuild": "esno scripts/prebuild.js",
+    "dev": "pnpm run prebuild && rollup --config --watch",
+    "build": "pnpm run prebuild && rollup --config"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "nanoid": "^3.3.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-multi-entry": "^4.1.0",
+    "chalk": "^5.0.1",
+    "esno": "*",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.0.1",
+    "rollup": "^2.70.1"
+  }
+}

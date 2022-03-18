@@ -1,0 +1,93 @@
+.d2-flex {
+  display: flex;
+
+  &.d2-flex--inline-flex { display: inline-flex; }
+  &.d2-flex--block { display: block; }
+  &.d2-flex--inline { display: inline; }
+  &.d2-flex--inline-block { display: inline-block; }
+
+  &.d2-flex--wrap { flex-wrap: wrap; }
+  &.d2-flex--wrap-r { flex-wrap: wrap-reverse; }
+
+  &.d2-flex--dir-top { flex-direction: column; }
+  &.d2-flex--dir-bottom { flex-direction: column-reverse; box-pack: end; }
+  &.d2-flex--dir-left { flex-direction: row; }
+  &.d2-flex--dir-right { flex-direction: row-reverse; box-pack: end; }
+
+  &.d2-flex--main-left { justify-content: flex-start; }
+  &.d2-flex--main-right { justify-content: flex-end; }
+  &.d2-flex--main-justify { justify-content: space-between; }
+  &.d2-flex--main-center { justify-content: center; }
+
+  &.d2-flex--cross-top { align-items: flex-start; }
+  &.d2-flex--cross-bottom { align-items: flex-end; }
+  &.d2-flex--cross-center { align-items: center; }
+  &.d2-flex--cross-baseline { align-items: baseline; }
+  &.d2-flex--cross-stretch { align-items: stretch; }
+
+  &.d2-flex--self-auto { align-self: auto; }
+  &.d2-flex--self-top { align-self: flex-start; }
+  &.d2-flex--self-bottom { align-self: flex-end; }
+  &.d2-flex--self-center { align-self: center; }
+  &.d2-flex--self-baseline { align-self: baseline; }
+  &.d2-flex--self-stretch { align-self: stretch; }
+
+  &.d2-flex--content-start { align-content: flex-start; }
+  &.d2-flex--content-end { align-content: flex-end; }
+  &.d2-flex--content-center { align-content: center; }
+  &.d2-flex--content-between { align-content: space-between; }
+  &.d2-flex--content-around { align-content: space-around; }
+  &.d2-flex--content-stretch { align-content: stretch; }
+
+  &.d2-flex--box-mean > *,
+  &.d2-flex--box-first > *,
+  &.d2-flex--box-last > *,
+  &.d2-flex--box-justify > * {
+    width: 0%;
+    height: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  &.d2-flex--box-first > :first-child,
+  &.d2-flex--box-last > :last-child,
+  &.d2-flex--box-justify > :first-child,
+  &.d2-flex--box-justify > :last-child {
+    width: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &.d2-flex--dir-top.d2-flex--box-mean > *,
+  &.d2-flex--dir-top.d2-flex--box-first > *,
+  &.d2-flex--dir-top.d2-flex--box-last > *,
+  &.d2-flex--dir-top.d2-flex--box-justify > *,
+  &.d2-flex--dir-bottom.d2-flex--box-mean > *,
+  &.d2-flex--dir-bottom.d2-flex--box-first > *,
+  &.d2-flex--dir-bottom.d2-flex--box-last > *,
+  &.d2-flex--dir-bottom.d2-flex--box-justify > * {
+    width: auto;
+    height: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  &.d2-flex--dir-top.d2-flex--box-first > :first-child,
+  &.d2-flex--dir-top.d2-flex--box-last > :last-child,
+  &.d2-flex--dir-top.d2-flex--box-justify > :first-child,
+  &.d2-flex--dir-top.d2-flex--box-justify > :last-child,
+  &.d2-flex--dir-bottom.d2-flex--box-first > :first-child,
+  &.d2-flex--dir-bottom.d2-flex--box-last > :last-child,
+  &.d2-flex--dir-bottom.d2-flex--box-justify > :first-child,
+  &.d2-flex--dir-bottom.d2-flex--box-justify > :last-child {
+    height: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  @for $n from 0 through 10 {
+    .flex-box-#{$n} {
+      flex-grow: $n;
+      flex-shrink: $n;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@d2-framework/vite-plugin-md",
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "rollup --config --watch",
+    "build": "rollup --config"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "highlight.js": "^11.4.0",
+    "lodash": "^4.17.21",
+    "markdown-it": "^12.3.2",
+    "vite-plugin-md": "^0.11.9"
+  },
+  "devDependencies": {
+    "rollup": "^2.70.1"
+  }
+}

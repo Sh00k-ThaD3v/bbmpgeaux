@@ -1,0 +1,74 @@
+$classname: '#{$namespace}-layout-dashboard';
+
+@function --key ($name) {
+  @return --d2-admin-layout-dashboard-#{$name};
+}
+
+@function --var ($name) {
+  @return var(#{--key($name)});
+}
+
+@mixin inLayoutDashboard () {
+  body.#{$classname} {
+    @content;
+  }
+}
+
+$color-bg-app: #E9EEF1;
+$color-bg-container: #FFFFFF;
+
+:root {
+  // color
+  #{--key('color-bg-app')}: $color-bg-app;
+  #{--key('color-bg-app-rgba-blur')}: rgba($color-bg-app, 0.8);
+  #{--key('color-bg-app-rgba-blur-moz')}: rgba($color-bg-app, 0.98);
+
+  #{--key('color-bg-container')}: $color-bg-container;
+
+  #{--key('color-bg-popup')}: #FFFFFF;
+  #{--key('color-bg-item-hover')}: #F6F8FB;
+  #{--key('color-bg-item-selected')}: #FFFFFF;
+  #{--key('color-text-item')}: #606266;
+  #{--key('color-text-item-selected')}: #2F74FF;
+  // item
+  #{--key('item-font-size')}: 14px;
+  #{--key('item-radius')}: 4px;
+  #{--key('item-line-height')}: 40px;
+  #{--key('item-height')}: 50px;
+  #{--key('item-margin-y')}: calc((#{--var('item-height')} - #{--var('item-line-height')}) / 2);
+  #{--key('item-margin-x')}: --var('item-margin-y');
+  // header
+  #{--key('header-height')}: --var('item-height');
+  #{--key('header-border-width')}: 1px;
+  #{--key('header-border-color')}: --var('color-bg-app');
+  // side
+  #{--key('side-width')}: 220px;
+  #{--key('side-width-collapsed')}: --var('item-height');
+  // footer
+  #{--key('footer-height')}: --var('header-height');
+  #{--key('footer-width')}: --var('side-width');
+  #{--key('footer-border-width')}: 1px;
+  // body
+  #{--key('body-padding')}: 16px;
+  // body main
+  #{--key('body-main-padding')}: --var('body-padding');
+  #{--key('body-main-padding-x')}: --var('body-main-padding');
+  #{--key('body-main-padding-y')}: --var('body-main-padding');
+  #{--key('body-main-bg-color')}: --var('color-bg-container');
+  #{--key('body-main-bg-color-rgba-blur')}: rgba($color-bg-container, 0.8);
+  #{--key('body-main-bg-color-rgba-blur-moz')}: rgba($color-bg-container, 0.98);
+  // body header
+  #{--key('body-header-padding')}: --var('body-padding');
+  #{--key('body-header-padding-x')}: --var('body-header-padding');
+  #{--key('body-header-padding-y')}: --var('body-header-padding');
+  #{--key('body-header-border-width')}: 1px;
+  #{--key('body-header-border-color')}: --var('color-bg-app');
+  #{--key('body-header-border-color-ghost')}: --var('body-main-bg-color');
+  // body footer
+  #{--key('body-footer-padding')}: --var('body-padding');
+  #{--key('body-footer-padding-x')}: --var('body-footer-padding');
+  #{--key('body-footer-padding-y')}: --var('body-footer-padding');
+  #{--key('body-footer-border-width')}: 1px;
+  #{--key('body-footer-border-color')}: --var('color-bg-app');
+  #{--key('body-footer-border-color-ghost')}: --var('body-main-bg-color');
+}

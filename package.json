@@ -1,0 +1,16 @@
+{
+  "name": "d2-framework",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "template/*"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "lerna-wizard"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "lerna-wizard": "^1.1.1"
+  }
+}
