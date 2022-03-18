@@ -1,0 +1,46 @@
+{
+  "name": "d2-admin",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@icon-park/vue-next": "^1.3.3",
+    "@iconify/iconify": "^2.0.2",
+    "@popperjs/core": "^2.9.2",
+    "axios": "^0.21.1",
+    "classnames": "^2.3.1",
+    "lodash-es": "^4.17.21",
+    "vue": "^3.1.1",
+    "vue-router": "^4.0.9"
+  },
+  "devDependencies": {
+    "@iconify/json": "^1.1.357",
+    "@rollup/plugin-dsv": "^2.0.1",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vitejs/plugin-vue-jsx": "^1.1.5",
+    "@vue/compiler-sfc": "^3.1.1",
+    "autoprefixer": "^10.2.6",
+    "miragejs": "^0.1.41",
+    "postcss": "^8.3.5",
+    "sass": "^1.35.1",
+    "tailwindcss": "^2.1.4",
+    "vite": "^2.3.7",
+    "vite-plugin-pages": "^0.13.1",
+    "vite-plugin-purge-icons": "^0.7.0",
+    "vite-plugin-svg-icons": "^0.7.1"
+  },
+  "browserslist": [
+    "ie >= 8",
+    "ie_mob >= 10",
+    "ff >= 26",
+    "chrome >= 30",
+    "safari >= 6",
+    "opera >= 23",
+    "ios >= 5",
+    "android >= 2.3",
+    "bb >= 10"
+  ]
+}

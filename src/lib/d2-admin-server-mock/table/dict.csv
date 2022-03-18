@@ -1,0 +1,5 @@
+type,value,label
+sex,1,男
+sex,2,女
+yes,1,是
+yes,0,否

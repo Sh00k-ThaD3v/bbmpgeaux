@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "d2-components/*": ["src/lib/d2-components/*"],
+      "d2-admin-server-mock/*": ["src/lib/d2-admin-server-mock/*"]
+    },
+    // strict and moduleResolution is for volar
+    // https://github.com/johnsoncodehk/volar#note
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "dist"]
+}

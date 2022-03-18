@@ -1,0 +1,109 @@
+@mixin mix-input-color-styles ($suffix) {
+  color: var(--d2-input-font-color-#{$suffix});
+  border-color: var(--d2-input-border-color-#{$suffix});
+  background-color: var(--d2-input-background-color-#{$suffix});
+}
+
+@mixin mix-input-color ($color) {
+  @include mix-input-color-styles(#{$color}-base);
+  &:hover { @include mix-input-color-styles(#{$color}-hover); }
+  &:focus, .is-focus { @include mix-input-color-styles(#{$color}-focus); }
+  &:active { @include mix-input-color-styles(#{$color}-active); }
+  @include when(disabled) {
+    &, &:hover, &:focus {
+      cursor: not-allowed;
+      @include mix-input-color-styles(#{$color}-disabled);
+    }
+  }
+}
+
+@mixin mix-input-and-wrapper-size-public ($size) {
+  padding: var(--d2-input-padding-y-#{$size}) var(--d2-input-padding-x-#{$size});
+  border-radius: var(--d2-input-border-radius-#{$size});
+  font-size: var(--d2-input-font-size-#{$size});
+  font-weight: var(--d2-input-font-weight-#{$size});
+  line-height: var(--d2-input-line-height-#{$size});
+}
+
+@mixin mix-input-size ($size) {
+  @include mix-input-and-wrapper-size-public($size);
+}
+
+@mixin mix-input-wrapper-size ($size) {
+  @include mix-input-and-wrapper-size-public($size);
+  @include when(prefix-has) {
+    padding-left: var(--d2-input-padding-y-#{$size});
+  }
+  @include when(suffix-has) {
+    padding-right: var(--d2-input-padding-y-#{$size});
+  }
+  & > .#{$namespace}-input-icon {
+    height: var(--d2-input-line-height-#{$size});
+    width: var(--d2-input-line-height-#{$size});
+  }
+}
+
+@mixin mix-input-and-wrapper-public {
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  width: 100%;
+  transition: --var-transition-speed(fast);
+  border-width: var(--d2-border-width);
+  border-style: var(--d2-border-style);
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+@include b(input) {
+  display: inline-block;
+  @include mix-input-and-wrapper-public;
+  @include mix-input-color(base);
+  @each $color, $color-setting in $--d2-color {
+    @include m($color) {
+      @include mix-input-color($color);
+    }
+  }
+  @each $size, $size-setting in $--d2-input-sizes {
+    @if $size == base {
+      @include mix-input-size(base);
+    }
+    @else {
+      @include m($size) {
+        @include mix-input-size($size);
+      }
+    }
+  }
+}
+
+@include b(input-wrapper) {
+  display: inline-flex;
+  @include mix-input-and-wrapper-public;
+  & > .#{$namespace}-input-icon {
+    display: inline-block;
+    text-align: center;
+  }
+  @include b(input) {
+    padding: 0;
+    border-radius: 0;
+    border-width: 0;
+  }
+  @include mix-input-color(base);
+  @each $color, $color-setting in $--d2-color {
+    @include m($color) {
+      @include mix-input-color($color);
+    }
+  }
+  @each $size, $size-setting in $--d2-input-sizes {
+    @if $size == base {
+      @include mix-input-wrapper-size(base);
+    }
+    @else {
+      @include m($size) {
+        @include mix-input-wrapper-size($size);
+      }
+    }
+  }
+}

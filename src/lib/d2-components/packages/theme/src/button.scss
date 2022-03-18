@@ -1,0 +1,240 @@
+@mixin mix-button-color-styles ($suffix) {
+  color: var(--d2-button-font-color-#{$suffix});
+  border-color: var(--d2-button-border-color-#{$suffix});
+  background-color: var(--d2-button-background-color-#{$suffix});
+}
+
+@mixin mix-button-color ($color) {
+  @include mix-button-color-styles(#{$color}-base);
+  &:hover { @include mix-button-color-styles(#{$color}-hover); }
+  &:focus { @include mix-button-color-styles(#{$color}-focus); }
+  &:active, &.is-active { @include mix-button-color-styles(#{$color}-active); }
+  @include when(disabled) {
+    &, &:hover, &:focus {
+      cursor: not-allowed;
+      @include mix-button-color-styles(#{$color}-disabled);
+    }
+  }
+  @include when(loading) {
+    &, &:hover, &:focus {
+      cursor: not-allowed;
+      @include mix-button-color-styles(#{$color}-loading);
+    }
+  }
+  @include when(plain) {
+    @include mix-button-color-styles(#{$color}-plain);
+    &:hover { @include mix-button-color-styles(#{$color}-plain-hover); }
+    &:focus { @include mix-button-color-styles(#{$color}-plain-focus); }
+    &:active, &.is-active { @include mix-button-color-styles(#{$color}-plain-active); }
+    @include when(disabled) {
+      &, &:hover, &:focus {
+        @include mix-button-color-styles(#{$color}-plain-disabled);
+      }
+    }
+    @include when(loading) {
+      &, &:hover, &:focus {
+        @include mix-button-color-styles(#{$color}-plain-loading);
+      }
+    }
+  }
+  @include when(text) {
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--d2-button-font-color-#{$color}-text);
+    &:hover { color: var(--d2-button-font-color-#{$color}-text-hover); }
+    &:focus { color: var(--d2-button-font-color-#{$color}-text-focus); }
+    &:active, &.is-active { color: var(--d2-button-font-color-#{$color}-text-active); }
+    @include when(disabled) {
+      &, &:hover, &:focus {
+        border-color: transparent;
+        background-color: transparent;
+        color: var(--d2-button-font-color-#{$color}-text-disabled);
+      }
+    }
+    @include when(loading) {
+      &, &:hover, &:focus {
+        border-color: transparent;
+        background-color: transparent;
+        color: var(--d2-button-font-color-#{$color}-text-loading);
+      }
+    }
+  }
+}
+
+@mixin mix-button-size($size) {
+  padding: var(--d2-button-padding-y-#{$size}) var(--d2-button-padding-x-#{$size});
+  border-radius: var(--d2-button-border-radius-#{$size});
+  font-size: var(--d2-button-font-size-#{$size});
+  font-weight: var(--d2-button-font-weight-#{$size});
+  line-height: var(--d2-button-line-height-#{$size});
+  --round-radius: calc((var(--d2-button-line-height-#{$size}) + var(--d2-button-padding-y-#{$size}) * 2) * 0.5);
+  // no better solution has yet been found
+  & > .#{$namespace}-icon {
+    @if $size == base {
+      vertical-align: -.15em;
+    }
+    @else {
+      vertical-align: -.125em;
+    }
+  }
+  // space between button and button, button and button group
+  & + &,
+  & + .#{$namespace}-button-group {
+    margin-left: var(--d2-button-space-#{$size});
+  }
+  // space between the icon and the text inside the button
+  & > .#{$namespace}-icon + span,
+  & > span + .#{$namespace}-icon {
+    margin-left: calc(var(--d2-button-padding-x-#{$size}) * 0.5);
+  }
+  @include when(circle) {
+    padding: var(--d2-button-padding-y-#{$size});
+    & > span:not(.#{$namespace}-icon) {
+      @include text-ellipsis;
+      vertical-align: bottom;
+      width: var(--d2-button-line-height-#{$size});
+    }
+    & > .#{$namespace}-icon {
+      width: var(--d2-button-line-height-#{$size});
+    }
+  }
+}
+
+@include b(button) {
+  display: inline-block;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  border-width: var(--d2-border-width);
+  border-style: var(--d2-border-style);
+  transition: --var-transition-speed(fast);
+  --ring-color: #{--var-color('gray', 500, 10)};
+  box-shadow: #{--var-shadow(sm)};
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  & > span {
+    display: inline-block;
+    pointer-events: none;
+  }
+  & > .#{$namespace}-icon {
+    line-height: 1;
+  }
+  @include when(text) {
+    box-shadow: #{--var-shadow(none)};
+    --ring-color: #{--var-color('gray', 500, 30)};
+  }
+  @include when(round) {
+    border-radius: --var-radius(full);
+  }
+  @include when(circle) {
+    border-radius: 50%;
+  }
+  @include when(round-left) {
+    border-top-left-radius: var(--round-radius);
+    border-bottom-left-radius: var(--round-radius);
+  }
+  @include when(round-right) {
+    border-top-right-radius: var(--round-radius);
+    border-bottom-right-radius: var(--round-radius);
+  }
+  @include when(ring) {
+    &:focus {
+      box-shadow:
+        0 0 0 var(--ring-offset-width) var(--d2-color-white),
+        0 0 0 calc(var(--ring-offset-width) + var(--ring-width)) var(--ring-color);
+    }
+  }
+  @for $i from nth($--d2-ring-width, 1) through nth($--d2-ring-width, 2) {
+    @include when(ring-width-#{$i}) {
+      --ring-width: var(--d2-ring-width-#{$i});
+    }
+  }
+  @for $i from nth($--d2-ring-offset-width, 1) through nth($--d2-ring-offset-width, 2) {
+    @include when(ring-offset-width-#{$i}) {
+      --ring-offset-width: var(--d2-ring-offset-width-#{$i});
+    }
+  }
+  @include mix-button-color(base);
+  @each $color, $color-setting in $--d2-color {
+    @include m($color) {
+      @include mix-button-color($color);
+      --ring-color: #{--var-color($color, 500, 30)};
+      @include when (text) {
+        --ring-color: #{--var-color($color, 500, 30)};
+      }
+    }
+  }
+  @each $size, $size-setting in $--d2-button-sizes {
+    @if $size == base {
+      @include mix-button-size(base);
+    }
+    @else {
+      @include m($size) {
+        @include mix-button-size($size);
+      }
+    }
+  }
+}
+
+@mixin mix-button-group-size ($size) {
+  font-size: var(--d2-button-font-size-#{$size});
+  line-height: var(--d2-button-line-height-#{$size});
+  & + &,
+  & + .#{$namespace}-button {
+    margin-left: var(--d2-button-group-space-#{$size});
+  }
+}
+
+@include b(button-group) {
+  display: inline-block;
+  @include clearfix;
+  @each $size, $size-setting in $--d2-button-sizes {
+    @if $size == base {
+      @include mix-button-group-size(base);
+    }
+    @else {
+      @include m($size) {
+        @include mix-button-group-size($size);
+      }
+    }
+  }
+  & > .#{$namespace}-button {
+    position: relative;
+    & + .#{$namespace}-button {
+      margin-left: 0;
+    }
+    &:first-child:not(:last-child) {
+      border-top-right-radius: --var-radius(none);
+      border-bottom-right-radius: --var-radius(none);
+    }
+    &:last-child:not(:first-child) {
+      border-top-left-radius: --var-radius(none);
+      border-bottom-left-radius: --var-radius(none);
+    }
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+    &:not(:last-child) {
+      margin-right: calc(var(--d2-border-width) * -1);
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      z-index: 1;
+    }
+    @include when(disabled) {
+      z-index: 1;
+    }
+    @include when(active) {
+      z-index: 1;
+    }
+  }
+}

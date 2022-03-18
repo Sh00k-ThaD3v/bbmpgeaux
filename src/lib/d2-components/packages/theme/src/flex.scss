@@ -1,0 +1,106 @@
+@mixin flex-space ($space, $position) {
+  &.is-space-#{$position}-#{$space} > * + * {
+    margin-#{$position}: var(--d2-flex-space-#{$space});
+  }
+}
+
+@include b(flex) {
+  display: flex;
+
+  @each $_flex-dir in $--d2-flex-dir {
+    @include flex-space(base, $_flex-dir);
+    @each $_space, $_setting in $--d2-space {
+      @include flex-space($_space, $_flex-dir);
+    }
+  }
+
+  &.is-inline-flex { display: inline-flex; }
+  &.is-block { display: block; }
+  &.is-inline { display: inline; }
+  &.is-inline-block { display: inline-block; }
+
+  &.is-wrap { flex-wrap: wrap; }
+  &.is-wrap-r { flex-wrap: wrap-reverse; }
+
+  &.is-dir-top { flex-direction: column; }
+  &.is-dir-bottom { flex-direction: column-reverse; box-pack: end; }
+  &.is-dir-left { flex-direction: row; }
+  &.is-dir-right { flex-direction: row-reverse; box-pack: end; }
+
+  &.is-main-left { justify-content: flex-start; }
+  &.is-main-right { justify-content: flex-end; }
+  &.is-main-justify { justify-content: space-between; }
+  &.is-main-center { justify-content: center; }
+
+  &.is-cross-top { align-items: flex-start; }
+  &.is-cross-bottom { align-items: flex-end; }
+  &.is-cross-center { align-items: center; }
+  &.is-cross-baseline { align-items: baseline; }
+  &.is-cross-stretch { align-items: stretch; }
+
+  &.is-self-auto { align-self: auto; }
+  &.is-self-top { align-self: flex-start; }
+  &.is-self-bottom { align-self: flex-end; }
+  &.is-self-center { align-self: center; }
+  &.is-self-baseline { align-self: baseline; }
+  &.is-self-stretch { align-self: stretch; }
+
+  &.is-content-start { align-content: flex-start; }
+  &.is-content-end { align-content: flex-end; }
+  &.is-content-center { align-content: center; }
+  &.is-content-between { align-content: space-between; }
+  &.is-content-around { align-content: space-around; }
+  &.is-content-stretch { align-content: stretch; }
+
+  &.is-box-mean > *,
+  &.is-box-first > *,
+  &.is-box-last > *,
+  &.is-box-justify > * {
+    // width: 0%;
+    height: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  &.is-box-first > :first-child,
+  &.is-box-last > :last-child,
+  &.is-box-justify > :first-child,
+  &.is-box-justify > :last-child {
+    // width: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &.is-dir-top.is-box-mean > *,
+  &.is-dir-top.is-box-first > *,
+  &.is-dir-top.is-box-last > *,
+  &.is-dir-top.is-box-justify > *,
+  &.is-dir-bottom.is-box-mean > *,
+  &.is-dir-bottom.is-box-first > *,
+  &.is-dir-bottom.is-box-last > *,
+  &.is-dir-bottom.is-box-justify > * {
+    // width: auto;
+    height: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  &.is-dir-top.is-box-first > :first-child,
+  &.is-dir-top.is-box-last > :last-child,
+  &.is-dir-top.is-box-justify > :first-child,
+  &.is-dir-top.is-box-justify > :last-child,
+  &.is-dir-bottom.is-box-first > :first-child,
+  &.is-dir-bottom.is-box-last > :last-child,
+  &.is-dir-bottom.is-box-justify > :first-child,
+  &.is-dir-bottom.is-box-justify > :last-child {
+    height: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  @for $n from 0 through 10 {
+    .flex-box-#{$n} {
+      flex-grow: $n;
+      flex-shrink: $n;
+    }
+  }
+}
